@@ -23,9 +23,9 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
 
         while True:
             try:
-                telefone = input("Digite seu número de telefone (*) **-**: ")
+                telefone = input("Digite seu número de telefone (**) ****-****: ")
                 if telefone.replace(" ", '').isdigit():
-                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO E COMECE DESSE JEITO: (*) **-**!\033[0m\033[31m<------\033[0m")
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO E COMECE DESSE JEITO: (**) ****-****!\033[0m\033[31m<------\033[0m")
                 if "(" not in telefone or ")" not in telefone or "-" not in telefone:
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, SIGA A FORMATAÇÃO CORRETA EX: (*) **-**\033[0m \033[31m<------\033[0m")
                 break
@@ -45,7 +45,7 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
 
         while True:
             try:
-                sexo = input("Sexo:(M/F) ").upper()
+                sexo = input("Sexo:(MASCULINO/FEMININO) ").upper()
                 if sexo not in ("MASCULINO", "M", "F", "FEMININO"):
                     raise ValueError("\033[31m------>\033[0m\033[33mOPÇÃO INVÁLIDA, DIGITE MASCULINO, OU FEMENINO!\033[0m\033[31m<------\033[0m")
                 if not sexo.isalpha():
@@ -64,6 +64,8 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS NÚMEROS AQUI!\033[0m\033[31m<------\033[0m")
                 if identidade == '':
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
+                if not identidade != 11:
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, COLOQUE OS 11 DIGITOS DA IDENTIDADE!\033[0m\033[31m<------\033[0m")
                 break
             except ValueError as erro:
                 print(str(erro))
@@ -197,6 +199,8 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
                     raise ValueError("POR FAVOR, APENAS NÚMERO POR AQUI!")
                 if identidade_responsavel == " ":
                     raise ValueError("POR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO!")
+                if not identidade_responsavel != 11:
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, COLOQUE OS 11 DIGITOS DA IDENTIDADE!\033[0m\033[31m<------\033[0m")
                 break
             except ValueError as erro:
                 print(str(erro))
@@ -274,7 +278,6 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
     print("\033[31m-=-\033[0m" * 20)
     print("\033[32mSEU CADASTRO FOI CONCLUIDO COM SUCESSO!\033[0m")
     print("\033[31m-=-\033[0m" * 20)
-
 
 def listar():
     try:
