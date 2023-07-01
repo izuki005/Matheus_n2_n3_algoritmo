@@ -295,7 +295,7 @@ def listar():
                     campos = linha.strip().split(":")
                     campo = campos[1] if len(campos) > 1 else ""
                     dados_cadastro.append(f"{campos[0]}:{campo}")
-                    if len(dados_cadastro) == 22:  # Número total de campos
+                    if len(dados_cadastro) == 21:  # Número total de campos
                         print(f"Cadastro {cadastro}")
                         print("\n".join(dados_cadastro))
                         print()
@@ -306,7 +306,8 @@ def listar():
     except FileNotFoundError:
         print(f"O arquivo '{arquivo_dados}' não foi encontrado.")
     except IOError:
-        print(f"Erro ao abrir o arquivo '{arquivo_dados}'. Verifique as permissões.")
+        print(f"Erro ao abrir o arquivo '{arquivo_dados}")
+
 
 def alterar_dados(arquivo):
     print('\033[33m-=-\033[0m' * 20)
