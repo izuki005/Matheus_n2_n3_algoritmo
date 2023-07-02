@@ -178,7 +178,7 @@ def listar():
                 print('NENHUM DADO DE CADASTRO ENCONTRADO')
             else:
                 print('DADOS DE ALUNOS CADASTRADOS:')
-                registros = []  # List to store all registrations
+                registros = [] 
                 for linha in linhas:
                     dados = linha.strip().split(',')
 
