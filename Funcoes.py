@@ -6,6 +6,15 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
 
         while True:
             try:
+                id = input("Digite o id do jogador: ")
+                if not id.replace(" ", "").isdigit():
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS NÚMEROS AQUI E NÃO DEIXA VAZIO!\033[0m\033[31m<------\033[0m")
+                break
+            except ValueError as erro:
+                print(str(erro))
+
+        while True:
+            try:
                 # abrir com with, abre e fecha o arquivo // "a" de append, se não tiver ou tiver um texto ele adiciona mais um
                 nome = input("Digite o nome do jogador: ")
                 if not nome.replace(" ", "").isalpha():
@@ -45,6 +54,7 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
                 if sexo == '':
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
+
                 break
             except ValueError as erro:
                 print(str(erro))
@@ -148,8 +158,7 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
             except ValueError as erro:
                 print(str(erro))
 
-        aluno = f"Nome: {nome}\nNúmero: {telefone}\nE-mail: {e_mail}\nSexo: {sexo}\nCpf: {cpf}\nData de Nascimento: {data_nascimento}\n" \
-                f"CEP: {cep}\nNome do responsável: {nome_responsavel}\nCPF do responsável: {identidade_responsavel}\nNome escola: {nome_escola}\nSérie escola: {serie_escola}\nPosição: {posicao}\nÍdolo: {idolo}\n"
+        aluno = f"{id},{nome},{telefone},{e_mail},{sexo},{cpf},{data_nascimento},{cep},{nome_responsavel},{identidade_responsavel},{nome_escola},{serie_escola},{posicao},{idolo}\n"
 
         arquivo.write(aluno)
 
@@ -169,206 +178,161 @@ def listar():
                 print('NENHUM DADO DE CADASTRO ENCONTRADO')
             else:
                 print('DADOS DE ALUNOS CADASTRADOS:')
-                contador = 1
-                cadastro = [] 
+                registros = []  # List to store all registrations
                 for linha in linhas:
-                    if linha.startswith("Nome:"):
-                        if cadastro:
-                            print(f"\nCADASTRO {contador}:")
-                            for linha in cadastro:
-                                campo_valor, valor_campo = linha.split(': ')
-                                print(f"{campo_valor}: {valor_campo}")
-                            contador += 1
-                            cadastro = []
-                    cadastro.append(linha.strip())
-                if cadastro:
-                    print(f"\nCADASTRO {contador}:")
-                    for linha_detalhe in cadastro:
-                        campo_valor, valor_campo = linha_detalhe.split(': ')
-                        print(f"{campo_valor}: {valor_campo}")
+                    dados = linha.strip().split(',')
+
+                    id = int(dados[0])
+                    nome = str(dados[1])
+                    telefone = str(dados[2])
+                    e_mail = str(dados[3])
+                    sexo = str(dados[4])
+                    cpf = dados[5]
+                    data_nascimento = str(dados[6])
+                    cep = dados[7]
+                    nome_responsavel = str(dados[8])
+                    identidade_responsavel = dados[9]
+                    nome_escola = str(dados[10])
+                    serie_escola = dados[11]
+                    posicao = str(dados[12])
+                    idolo = str(dados[13])
+
+                    dados_cadastro = {
+                        "Id:": id,
+                        "Nome": nome,
+                        "Telefone": telefone,
+                        "E-mail": e_mail,
+                        "Sexo": sexo,
+                        "CPF": cpf,
+                        "Data de Nascimento": data_nascimento,
+                        "CEP": cep,
+                        "Nome do Responsável": nome_responsavel,
+                        "Identidade do Responsável": identidade_responsavel,
+                        "Nome da Escola": nome_escola,
+                        "Série da Escola": serie_escola,
+                        "Posição": posicao,
+                        "Ídolo do Futebol": idolo
+                    }
+                    registros.append(dados_cadastro)
+
+                for dados_cadastro in registros:
+                    print("-------------------------------------------")
+                    for respositorio, valor in dados_cadastro.items():
+                        print(respositorio + ":", valor)
     except FileNotFoundError:
         print('Arquivo não encontrado')
     except Exception as e:
         print('Ocorreu um erro ao listar os dados:', str(e))
 
-def alterar_dados(arquivo):
-    print('\033[33m-=-\033[0m' * 20)
-    print('\033[36mALTERAR DADOS\033[0m')
-    print('\033[33m-=-\033[0m' * 20)
-    
-    dados = arquivo.readlines()
-    arquivo.seek(0)
-    
-    print("\033[33mCADASTROS DISPONIVEIS:\033[0m")
-    contador = 1
-    for linha in dados:
-        if linha.startswith('Nome:'):
-            print(contador)
-            contador += 1
 
-    # Solicitar ao usuário o número do cadastro a ser alterado
-    num_cadastro = int(input("\033[36mDIGITE O NÚMERO DO CADASTRO QUE DESEJA ALTERAR: \033[0m")) - 1
+def alterar_dados():
+    try:
+        with open('Dados.txt', 'r+') as arquivo:
+            print("-=-" * 20)
+            print("ALTERAR DADOS")
+            print("-=-" * 20)
+            linhas = arquivo.readlines()
+            if not linhas:
+                print('NENHUM DADO DE CADASTRO ENCONTRADO')
+                return
 
-    if num_cadastro < 0 or num_cadastro >= contador-1:
-        print('\033[31mNÚMERO DE CADASTRO INVÁLIDO!\033[0m')
-        arquivo.close()
-        return
+            id_aluno = int(input("Digite o ID do aluno que deseja alterar os dados: "))
 
-    # Encontrar a posição inicial dos dados do cadastro escolhido
-    cadastro = None
-    cadastro_atual = 0
+            cadastro = False
 
-    for i, linha in enumerate(dados):
-        if linha.startswith('Nome:'):
-            if cadastro_atual == num_cadastro:
-                cadastro = i
-                break
-            cadastro_atual += 1
+            for i, linha in enumerate(linhas):
+                dados = linha.strip().split(',')
 
-    if cadastro is None:
-        print('\033[31mNão foi possível encontrar o cadastro solicitado!\033[0m')
-        arquivo.close()
-        return
+                id = int(dados[0])
+                if id == id_aluno:
+                    cadastro = True
 
-    while True:
-        opcao = int(input('QUAL DESSES VOCÊ QUER MUDAR? \n1 - [NOME]\n'
-                          '2 - [NUMERO]\n'
-                          '3 - [E-MAIL]\n'
-                          '4 - [NOME_RESPOSÁVEL]\n'
-                          '5 - [NOME_ESCOLA]\n'
-                          '6 - [SERIE_ESCOLA]\n'
-                          '7 - [TORCIDA]\n'
-                          '8 - [POSIÇÃO]\n'
-                          '9 - [IDOLO]\n'
-                          'ESCOLHA UM DESSES: '))
+                    # Solicita os novos dados do aluno
+                    nome = input("Digite o novo nome: ")
+                    telefone = input("Digite o novo telefone: ")
+                    e_mail = input("Digite o novo e-mail: ")
+                    sexo = input("Digite o novo sexo: ")
+                    cpf = input("Digite o novo CPF: ")
+                    data_nascimento = input("Digite a nova data de nascimento: ")
+                    cep = input("Digite o novo CEP: ")
+                    nome_responsavel = input("Digite o novo nome do responsável: ")
+                    identidade_responsavel = input("Digite a nova identidade do responsável: ")
+                    nome_escola = input("Digite o novo nome da escola: ")
+                    serie_escola = input("Digite a nova série da escola: ")
+                    posicao = input("Digite a nova posição: ")
+                    idolo = input("Digite o novo ídolo do futebol: ")
 
-        if opcao == 1:
-            novo_nome = input('NOVO NOME: ')
-            dados[cadastro] = f"Nome: {novo_nome}\n"
-        elif opcao == 2:
-            novo_numero = input('NOVO NÚMERO: ')
-            dados[cadastro+1] = f"Número: {novo_numero}\n"
-        elif opcao == 3:
-            novo_email = input('NOVO E-MAIL: ')
-            dados[cadastro+2] = f"E-mail: {novo_email}\n"
-        elif opcao == 4:
-            novo_nome_responsavel = input('NOME DO RESPONSÁVEL: ')
-            dados[cadastro+3] = f"Nome do Responsável: {novo_nome_responsavel}\n"
-        elif opcao == 5:
-            novo_nome_escola = input('NOME DA NOVA ESCOLA: ')
-            dados[cadastro+4] = f"Nome da Escola: {novo_nome_escola}\n"
-        elif opcao == 6:
-            nova_serie_escola = input('NOVA SÉRIE ESCOLAR: ')
-            dados[cadastro+5] = f"Série Escolar: {nova_serie_escola}\n"
-        elif opcao == 7:
-            nova_torcida = input('NOVA TORCIDA: ')
-            dados[cadastro+6] = f"Torcida: {nova_torcida}\n"
-        elif opcao == 8:
-            nova_posicao = input('NOVA POSIÇÃO: ')
-            dados[cadastro+7] = f"Posição: {nova_posicao}\n"
-        elif opcao == 9:
-            novo_idolo = input('NOVO ÍDOLO: ')
-            dados[cadastro+8] = f"Ídolo: {novo_idolo}\n"
-        else:
-            print('\033[31mOPÇÃO INVÁLIDA\033[0m')
-            print('\033[33m-=-\033[0m' * 20)
-            continue
+                    # Atualiza os dados do aluno na linha correspondente
+                    dados_alterados = [
+                        str(id),
+                        nome,
+                        telefone,
+                        e_mail,
+                        sexo,
+                        cpf,
+                        data_nascimento,
+                        cep,
+                        nome_responsavel,
+                        identidade_responsavel,
+                        nome_escola,
+                        serie_escola,
+                        posicao,
+                        idolo
+                    ]
+                    linhas[i] = ','.join(dados_alterados) + '\n'
 
-        opcao2 = input('MAIS ALGUMA COISA QUE QUEIRA ALTERAR? SIM OU NÃO: ').upper()
-        while opcao2 != 'SIM' and opcao2 != 'S' and opcao2 != 'NÃO' and opcao2 != 'N':
-            print('OPÇÃO INVÁLIDA! APENAS SIM OU NÃO!')
-            opcao2 = input('MAIS ALGUMA COISA QUE QUEIRA ALTERAR? SIM OU NÃO: ').upper()
+                    # Escreve as alterações novas no arquivo
+                    arquivo.seek(0)
+                    arquivo.writelines(linhas)
+                    arquivo.truncate()
 
-        if opcao2 == 'NÃO' or opcao2 == 'N':
-            break
+                    print("Dados alterados com sucesso!")
+                    break
 
-    arquivo.writelines(dados)  # Escreve as alterações no arquivo
-    arquivo.truncate()
-    arquivo.close()
+            if not cadastro:
+                print("ID não encontrado.")
+    except FileNotFoundError:
+        print('Arquivo não encontrado')
+    except Exception as e:
+        print('Ocorreu um erro ao alterar os dados:', str(e))
 
-def apagar_dados(arquivo):
-    print('\033[33m-=-\033[0m' * 20)
-    print('\033[36mAPAGAR DADOS\033[0m')
-    print('\033[33m-=-\033[0m' * 20)
+def apagar_dados():
+    try:
+        with open('Dados.txt', 'r+') as arquivo:
+            print("-=-" * 20)
+            print("ALTERAR DADOS")
+            print("-=-" * 20)
+            linhas = arquivo.readlines()
+            if not linhas:
+                print('NENHUM DADO DE CADASTRO ENCONTRADO')
+                return
 
-    dados = arquivo.readlines()
-    arquivo.seek(0)
+            id_aluno = int(input("Digite o ID do aluno que deseja excluir os dados: "))
 
-    # Listar os cadastros disponíveis
-    print("Cadastros disponíveis:")
-    contador = 1
-    for linha in dados:
-        if linha.startswith('Nome:'):
-            print(contador)
-            contador += 1
+            excluido = False
+            novas_linhas = []
 
-    # Solicitar ao usuário o número do cadastro a ser apagado
-    num_cadastro = int(input("DIGITE O NÚMERO DO CADASTRO QUE DESEJA APAGAR: ")) - 1
+            for linha in linhas:
+                dados = linha.strip().split(',')
 
-    if num_cadastro < 0 or num_cadastro >= contador - 1:
-        print('\033[31mNúmero de cadastro inválido!\033[0m')
-        return
+                id = int(dados[0])
+                if id == id_aluno:
+                    excluido = True
+                else:
+                    novas_linhas.append(linha)
 
-    # Encontrar a posição inicial dos dados do cadastro escolhido
-    inicio_cadastro = None
-    cadastro_atual = 0
+            if excluido:
+                arquivo.seek(0)
+                arquivo.writelines(novas_linhas)
+                arquivo.truncate()
+                print("Dados excluídos com sucesso!")
+            else:
+                print("ID não encontrado.")
 
-    for i, linha in enumerate(dados):
-        if linha.startswith('Nome:'):
-            if cadastro_atual == num_cadastro:
-                inicio_cadastro = i
-                break
-            cadastro_atual += 1
-
-    if inicio_cadastro is None:
-        print('\033[31mNão foi possível encontrar o cadastro solicitado!\033[0m')
-        return
-
-    while True:
-        opcao = int(input('QUAL DESSES VOCÊ QUER APAGAR? \n1 - [NOME]\n'
-                          '2 - [NUMERO]\n'
-                          '3 - [E-MAIL]\n'
-                          '4 - [NOME_RESPOSÁVEL]\n'
-                          '5 - [NOME_ESCOLA]\n'
-                          '6 - [SERIE_ESCOLA]\n'
-                          '7 - [TORCIDA]\n'
-                          '8 - [POSIÇÃO]\n'
-                          '9 - [IDOLO]\n'
-                          'ESCOLHA UM DESSES: '))
-
-        if opcao == 1:
-            dados[inicio_cadastro] = 'Nome: \n'
-        elif opcao == 2:
-            dados[inicio_cadastro + 1] = 'Número: \n'
-        elif opcao == 3:
-            dados[inicio_cadastro + 2] = 'E-mail: \n'
-        elif opcao == 4:
-            dados[inicio_cadastro + 3] = 'Nome do Responsável: \n'
-        elif opcao == 5:
-            dados[inicio_cadastro + 4] = 'Nome da Escola: \n'
-        elif opcao == 6:
-            dados[inicio_cadastro + 5] = 'Série Escolar: \n'
-        elif opcao == 7:
-            dados[inicio_cadastro + 6] = 'Torcida: \n'
-        elif opcao == 8:
-            dados[inicio_cadastro + 7] = 'Posição: \n'
-        elif opcao == 9:
-            dados[inicio_cadastro + 8] = 'Ídolo: \n'
-        else:
-            print('\033[31mOPÇÃO INVÁLIDA\033[0m')
-            print('\033[33m-=-\033[0m' * 20)
-            continue
-
-        opcao2 = input('MAIS ALGUMA COISA QUE QUEIRA APAGAR? SIM OU NÃO: ').upper()
-        while opcao2 != 'SIM' and opcao2 != 'S' and opcao2 != 'NÃO' and opcao2 != 'N':
-            print('OPÇÃO INVÁLIDA! APENAS SIM OU NÃO!')
-            opcao2 = input('MAIS ALGUMA COISA QUE QUEIRA APAGAR? SIM OU NÃO: ').upper()
-
-        if opcao2 == 'NÃO' or opcao2 == 'N':
-            break
-
-    arquivo.writelines(dados)  # Escreve as alterações no arquivo
-    arquivo.truncate()  # Remove as linhas remanescentes do conteúdo anterior, garantindo que apenas os dados atualizados permaneçam no arquivo.
+    except FileNotFoundError:
+        print('Arquivo não encontrado')
+    except Exception as e:
+        print('Ocorreu um erro ao excluir os dados:', str(e))
 
 def backup():
     try:
@@ -377,7 +341,7 @@ def backup():
             conteudo = arquivo_original.read()
 
         # criar um novo arquivo de backup
-        with open("backup_Dados.txt", "w") as arquivo_backup:
+        with open("backup_Dados.txt", "a") as arquivo_backup:
             arquivo_backup.write(conteudo)
 
         print("-=-" * 20)
@@ -425,9 +389,7 @@ def menu():
             try:
                 if not os.path.exists("Dados.txt") or os.path.getsize("Dados.txt") == 0:
                     raise ValueError(" AINDA NÃO HÁ DADOS PARA ALTERAR ")
-                arquivo_aberto = open("Dados.txt", "r+")
-                alterar_dados(arquivo_aberto)  # Passa o arquivo_aberto como argumento
-                arquivo_aberto.close()
+                alterar_dados()
             except ValueError as error:
                 print("-=-" * 20)
                 print(str(error))
@@ -437,9 +399,7 @@ def menu():
             try:
                 if not os.path.exists("Dados.txt") or os.path.getsize("Dados.txt") == 0:
                     raise ValueError("AINDA NÃO HÁ DADOS PARA APAGAR")
-                arquivo_aberto = open("Dados.txt", "r+")
-                apagar_dados(arquivo_aberto)
-                arquivo_aberto.close()
+                apagar_dados()
             except ValueError as error:
                 print("-=-" * 20)
                 print(str(error))
