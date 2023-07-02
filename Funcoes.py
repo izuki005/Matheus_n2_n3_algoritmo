@@ -3,17 +3,10 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
         print("\033[31m-=-\033[0m" * 20)
         print("\033[30mCADA\033[0m\033[31mSTRO\033[0m NA ESCOLINHA DO \033[30mC\033[0m.\033[31mR\033[0m. \033[31mFLAMENGO\033[0m")
         print("\033[31m-=-\033[0m" * 20)
+
         while True:
             try:
                 # abrir com with, abre e fecha o arquivo // "a" de append, se não tiver ou tiver um texto ele adiciona mais um
-                id = input("Digite o id do jogador: ")
-                if not id.replace(" ", "").isnumeric():
-                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS NÚMEROS AQUI!\033[0m\033[31m<------\033[0m")
-                break
-            except ValueError as erro:
-                print(str(erro))
-        while True:
-            try:
                 nome = input("Digite o nome do jogador: ")
                 if not nome.replace(" ", "").isalpha():
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
@@ -52,29 +45,19 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
                 if sexo == '':
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
-
                 break
             except ValueError as erro:
                 print(str(erro))
 
         while True:
             try:
-                identidade = input("IDENTIDADE: ")
-                if not identidade.isdigit():
+                cpf = input("IDENTIDADE: ")
+                if not cpf.isdigit():
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS NÚMEROS AQUI!\033[0m\033[31m<------\033[0m")
-                if identidade == '':
+                if cpf == '':
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
-                if not identidade != 11:
+                if not cpf != 11:
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, COLOQUE OS 11 DIGITOS DA IDENTIDADE!\033[0m\033[31m<------\033[0m")
-                break
-            except ValueError as erro:
-                print(str(erro))
-
-        while True:
-            try:
-                orgao_emissor = input("ORGÃO EMISSOR: ")
-                if not orgao_emissor.replace(' ', '').isalpha():
-                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
                 break
             except ValueError as erro:
                 print(str(erro))
@@ -84,88 +67,6 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
                 data_nascimento = input("DATA DE NASCIMENTO: ")
                 if not data_nascimento.replace('/', '').isdigit():
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, COLOQUE APENAS NÚMEROS E BARRAS CORRETAMENTE DD/MM/YYYY\033[0m\033[31m<------\033[0m")
-                break
-            except ValueError as erro:
-                print(str(erro))
-
-        while True:
-            try:
-                endereco = input('ENDEREÇO: ')
-                if not endereco.replace(" ", '').isalnum():
-                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
-                break
-            except ValueError as erro:
-                print(str(erro))
-
-        while True:
-            try:
-                bairro = input("BAIRRO: ")
-                if not bairro.replace(" ", '').isalpha():
-                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m \n"
-                        "\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS POR AQUI!\033[0m\033[31m<------\033[0m")
-                break
-            except ValueError as erro:
-                print(str(erro))
-
-        while True:
-            try:
-                cidade = input("CIDADE: ")
-                if not cidade.replace(" ", '').isalpha():
-                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m \n"
-                        "\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS POR AQUI!\033[0m\033[31m<------\033[0m")
-                break
-            except ValueError as erro:
-                print(str(erro))
-
-        estados = {
-            "AC": "Acre",
-            "AL": "Alagoas",
-            "AP": "Amapá",
-            "AM": "Amazonas",
-            "BA": "Bahia",
-            "CE": "Ceará",
-            "DF": "Distrito Federal",
-            "ES": "Espírito Santo",
-            "GO": "Goiás",
-            "MA": "Maranhão",
-            "MT": "Mato Grosso",
-            "MS": "Mato Grosso do Sul",
-            "MG": "Minas Gerais",
-            "PA": "Pará",
-            "PB": "Paraíba",
-            "PR": "Paraná",
-            "PE": "Pernambuco",
-            "PI": "Piauí",
-            "RJ": "Rio de Janeiro",
-            "RN": "Rio Grande do Norte",
-            "RS": "Rio Grande do Sul",
-            "RO": "Rondônia",
-            "RR": "Roraima",
-            "SC": "Santa Catarina",
-            "SP": "São Paulo",
-            "SE": "Sergipe",
-            "TO": "Tocantins"
-        }
-
-        while True:
-            try:
-                estado = input("ESTADO: ")
-                estado_sigla = None
-                estado_completo = None
-
-                if len(estado) == 2:
-                    # Se a entrada tem dois caracteres, assume-se que é a sigla do estado
-                    estado_sigla = estado.upper()
-                    estado_completo = estados.get(estado_sigla)
-                else:
-                    # Verifica se a entrada corresponde a um estado completo
-                    for sigla, nome in estados.items():
-                        if estado.lower() == nome.lower():
-                            estado_sigla = sigla
-                            estado_completo = nome
-                            break
-                if not estado_sigla or not estado_completo:
-                    raise ValueError("SIGLA OU NOME DE ESTADO INVÁLIDO")
                 break
             except ValueError as erro:
                 print(str(erro))
@@ -207,15 +108,6 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
 
         while True:
             try:
-                orgao_emissor_responsavel = input("ORGÃO EMISSOR DO RESPONSÁVEL: ")
-                if not orgao_emissor_responsavel.replace(" ", '').isalpha():
-                    raise ValueError("POR FAVOR, APENAS LETRAS AQUI!")
-                break
-            except ValueError as erro:
-                print(str(erro))
-
-        while True:
-            try:
                 nome_escola = input("NOME DA ESCOLA QUE FREQUENTA: ")
                 if not nome_escola.replace(" ", '').isalpha():
                     raise ValueError("POR FAVOR, APENAS LETRAS AQUI!")
@@ -238,20 +130,6 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
 
         while True:
             try:
-                torcida = input("VOCÊ TORCE PARA O FLAMENGO? SIM OU NÃO:").upper()
-                if not torcida.replace(" ", '').isalpha():
-                    raise ValueError("POR FAVOR, APENAS LETRAS AQUI!")
-                if torcida == "NÃO":
-                    outra_torcida = input("QUAL TIME VOCÊ TORCE? ")
-                    if outra_torcida == " ":
-                        raise ValueError("POR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO!")
-                break
-            except ValueError as erro:
-                print(str(erro))
-        outra_torcida = ''
-
-        while True:
-            try:
                 posicao = input("QUAL A POSIÇÃO VOCÊ ATUA ?")
                 if not posicao.replace(" ", '').isalpha():
                     raise ValueError("POR FAVOR, APENAS LETRAS AQUI!")
@@ -270,8 +148,8 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
             except ValueError as erro:
                 print(str(erro))
 
-        aluno = f"Nome: {nome}\nNúmero: {telefone}\nE-mail: {e_mail}\nSexo: {sexo}\nIdentidade: {identidade}\nOrgão Emissor: {orgao_emissor}\nData de Nascimento: {data_nascimento}\nEndereço: {endereco}\nBairro: {bairro}\nCidade: {cidade}\n" \
-                f"Estado: {estado}\nCEP: {cep}\nNome do responsável: {nome_responsavel}\nCPF do responsável: {identidade_responsavel}\nOrgão Emissor responsável: {orgao_emissor_responsavel}\nNome escola: {nome_escola}\nSérie escola: {serie_escola}\nTorcida: {torcida}\nOutra torcida: {outra_torcida}\nPosição: {posicao}\nÍdolo: {idolo}\n"
+        aluno = f"Nome: {nome}\nNúmero: {telefone}\nE-mail: {e_mail}\nSexo: {sexo}\nCpf: {cpf}\nData de Nascimento: {data_nascimento}\n" \
+                f"CEP: {cep}\nNome do responsável: {nome_responsavel}\nCPF do responsável: {identidade_responsavel}\nNome escola: {nome_escola}\nSérie escola: {serie_escola}\nPosição: {posicao}\nÍdolo: {idolo}\n"
 
         arquivo.write(aluno)
 
@@ -279,45 +157,48 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
     print("\033[32mSEU CADASTRO FOI CONCLUIDO COM SUCESSO!\033[0m")
     print("\033[31m-=-\033[0m" * 20)
 
+
 def listar():
     try:
-        with open('Dados.txt', 'r') as arquivo_dados:
+        with open('Dados.txt', 'r') as arquivo:
             print("-=-" * 20)
             print("LISTAR DADOS")
             print("-=-" * 20)
-            if not arquivo_dados:
-                print("NENHUM DADO DE ALUNO CADASTRADO.")
+            linhas = arquivo.readlines()
+            if not linhas:
+                print('NENHUM DADO DE CADASTRO ENCONTRADO')
             else:
-                print('DADOS DOS ALUNOS CADASTRADOS:')
-                cadastro = 1
-                dados_cadastro = []
-                for linha in arquivo_dados:
-                    campos = linha.strip().split(":")
-                    campo = campos[1] if len(campos) > 1 else ""
-                    dados_cadastro.append(f"{campos[0]}:{campo}")
-                    if len(dados_cadastro) == 21:  # Número total de campos
-                        print(f"Cadastro {cadastro}")
-                        print("\n".join(dados_cadastro))
-                        print()
-                        dados_cadastro = []
-                        cadastro += 1
-            print("-=-" * 20)
-
+                print('DADOS DE ALUNOS CADASTRADOS:')
+                contador = 1
+                cadastro = [] 
+                for linha in linhas:
+                    if linha.startswith("Nome:"):
+                        if cadastro:
+                            print(f"\nCADASTRO {contador}:")
+                            for linha in cadastro:
+                                campo_valor, valor_campo = linha.split(': ')
+                                print(f"{campo_valor}: {valor_campo}")
+                            contador += 1
+                            cadastro = []
+                    cadastro.append(linha.strip())
+                if cadastro:
+                    print(f"\nCADASTRO {contador}:")
+                    for linha_detalhe in cadastro:
+                        campo_valor, valor_campo = linha_detalhe.split(': ')
+                        print(f"{campo_valor}: {valor_campo}")
     except FileNotFoundError:
-        print(f"O arquivo '{arquivo_dados}' não foi encontrado.")
-    except IOError:
-        print(f"Erro ao abrir o arquivo '{arquivo_dados}")
-
+        print('Arquivo não encontrado')
+    except Exception as e:
+        print('Ocorreu um erro ao listar os dados:', str(e))
 
 def alterar_dados(arquivo):
     print('\033[33m-=-\033[0m' * 20)
     print('\033[36mALTERAR DADOS\033[0m')
     print('\033[33m-=-\033[0m' * 20)
-
+    
     dados = arquivo.readlines()
     arquivo.seek(0)
-
-    # Listar os cadastros disponíveis
+    
     print("\033[33mCADASTROS DISPONIVEIS:\033[0m")
     contador = 1
     for linha in dados:
@@ -326,7 +207,7 @@ def alterar_dados(arquivo):
             contador += 1
 
     # Solicitar ao usuário o número do cadastro a ser alterado
-    num_cadastro = int(input("\033[36mDIGITE O NÚEMERO DO CADASTRO QUE DESEJA ALTERAR: \033[0m")) - 1
+    num_cadastro = int(input("\033[36mDIGITE O NÚMERO DO CADASTRO QUE DESEJA ALTERAR: \033[0m")) - 1
 
     if num_cadastro < 0 or num_cadastro >= contador-1:
         print('\033[31mNÚMERO DE CADASTRO INVÁLIDO!\033[0m')
@@ -353,16 +234,12 @@ def alterar_dados(arquivo):
         opcao = int(input('QUAL DESSES VOCÊ QUER MUDAR? \n1 - [NOME]\n'
                           '2 - [NUMERO]\n'
                           '3 - [E-MAIL]\n'
-                          '4 - [ENDEREÇO]\n'
-                          '5 - [BAIRRO]\n'
-                          '6 - [CIDADE]\n'
-                          '7 - [ESTADO]\n'
-                          '8 - [NOME_RESPOSÁVEL]\n'
-                          '9 - [NOME_ESCOLA]\n'
-                          '10 - [SERIE_ESCOLA]\n'
-                          '11 - [TORCIDA]\n'
-                          '12 - [POSIÇÃO]\n'
-                          '13 - [IDOLO]\n'
+                          '4 - [NOME_RESPOSÁVEL]\n'
+                          '5 - [NOME_ESCOLA]\n'
+                          '6 - [SERIE_ESCOLA]\n'
+                          '7 - [TORCIDA]\n'
+                          '8 - [POSIÇÃO]\n'
+                          '9 - [IDOLO]\n'
                           'ESCOLHA UM DESSES: '))
 
         if opcao == 1:
@@ -375,35 +252,23 @@ def alterar_dados(arquivo):
             novo_email = input('NOVO E-MAIL: ')
             dados[cadastro+2] = f"E-mail: {novo_email}\n"
         elif opcao == 4:
-            novo_endereco = input('NOVO ENDEREÇO: ')
-            dados[cadastro+6] = f"Endereço: {novo_endereco}\n"
-        elif opcao == 5:
-            novo_bairro = input('NOVO BAIRRO: ')
-            dados[cadastro+7] = f"Bairro: {novo_bairro}\n"
-        elif opcao == 6:
-            nova_cidade = input('NOVA CIDADE: ')
-            dados[cadastro+8] = f"Cidade: {nova_cidade}\n"
-        elif opcao == 7:
-            novo_estado = input('NOVO ESTADO: ')
-            dados[cadastro+9] = f"Estado: {novo_estado}\n"
-        elif opcao == 8:
             novo_nome_responsavel = input('NOME DO RESPONSÁVEL: ')
-            dados[cadastro+10] = f"Nome do Responsável: {novo_nome_responsavel}\n"
-        elif opcao == 9:
+            dados[cadastro+3] = f"Nome do Responsável: {novo_nome_responsavel}\n"
+        elif opcao == 5:
             novo_nome_escola = input('NOME DA NOVA ESCOLA: ')
-            dados[cadastro+16] = f"Nome da Escola: {novo_nome_escola}\n"
-        elif opcao == 10:
+            dados[cadastro+4] = f"Nome da Escola: {novo_nome_escola}\n"
+        elif opcao == 6:
             nova_serie_escola = input('NOVA SÉRIE ESCOLAR: ')
-            dados[cadastro+17] = f"Série Escolar: {nova_serie_escola}\n"
-        elif opcao == 11:
+            dados[cadastro+5] = f"Série Escolar: {nova_serie_escola}\n"
+        elif opcao == 7:
             nova_torcida = input('NOVA TORCIDA: ')
-            dados[cadastro+18] = f"Torcida: {nova_torcida}\n"
-        elif opcao == 12:
+            dados[cadastro+6] = f"Torcida: {nova_torcida}\n"
+        elif opcao == 8:
             nova_posicao = input('NOVA POSIÇÃO: ')
-            dados[cadastro+20] = f"Posição: {nova_posicao}\n"
-        elif opcao == 13:
+            dados[cadastro+7] = f"Posição: {nova_posicao}\n"
+        elif opcao == 9:
             novo_idolo = input('NOVO ÍDOLO: ')
-            dados[cadastro+21] = f"Ídolo: {novo_idolo}\n"
+            dados[cadastro+8] = f"Ídolo: {novo_idolo}\n"
         else:
             print('\033[31mOPÇÃO INVÁLIDA\033[0m')
             print('\033[33m-=-\033[0m' * 20)
@@ -417,10 +282,10 @@ def alterar_dados(arquivo):
         if opcao2 == 'NÃO' or opcao2 == 'N':
             break
 
-    arquivo.seek(0)
     arquivo.writelines(dados)  # Escreve as alterações no arquivo
     arquivo.truncate()
     arquivo.close()
+
 def apagar_dados(arquivo):
     print('\033[33m-=-\033[0m' * 20)
     print('\033[36mAPAGAR DADOS\033[0m')
@@ -428,6 +293,7 @@ def apagar_dados(arquivo):
 
     dados = arquivo.readlines()
     arquivo.seek(0)
+
     # Listar os cadastros disponíveis
     print("Cadastros disponíveis:")
     contador = 1
@@ -436,8 +302,8 @@ def apagar_dados(arquivo):
             print(contador)
             contador += 1
 
-    # Solicitar ao usuário o número do cadastro a ser alterado
-    num_cadastro = int(input("DIGITE O NUMERO DO CADASTRO QUE VOCÊ DESEJA APAGAR: ")) - 1
+    # Solicitar ao usuário o número do cadastro a ser apagado
+    num_cadastro = int(input("DIGITE O NÚMERO DO CADASTRO QUE DESEJA APAGAR: ")) - 1
 
     if num_cadastro < 0 or num_cadastro >= contador - 1:
         print('\033[31mNúmero de cadastro inválido!\033[0m')
@@ -460,19 +326,15 @@ def apagar_dados(arquivo):
 
     while True:
         opcao = int(input('QUAL DESSES VOCÊ QUER APAGAR? \n1 - [NOME]\n'
-                            '2 - [NUMERO]\n'
-                            '3 - [E-MAIL]\n'
-                            '4 - [ENDEREÇO]\n'
-                            '5 - [BAIRRO]\n'
-                            '6 - [CIDADE]\n'
-                            '7 - [ESTADO]\n'
-                            '8 - [NOME_RESPOSÁVEL]\n'
-                            '9 - [NOME_ESCOLA]\n'
-                            '10 - [SERIE_ESCOLA]\n'
-                            '11 - [TORCIDA]\n'
-                            '12 - [POSIÇÃO]\n'
-                            '13 - [IDOLO]\n'
-                            'ESCOLHA UM DESSES: '))
+                          '2 - [NUMERO]\n'
+                          '3 - [E-MAIL]\n'
+                          '4 - [NOME_RESPOSÁVEL]\n'
+                          '5 - [NOME_ESCOLA]\n'
+                          '6 - [SERIE_ESCOLA]\n'
+                          '7 - [TORCIDA]\n'
+                          '8 - [POSIÇÃO]\n'
+                          '9 - [IDOLO]\n'
+                          'ESCOLHA UM DESSES: '))
 
         if opcao == 1:
             dados[inicio_cadastro] = 'Nome: \n'
@@ -481,25 +343,17 @@ def apagar_dados(arquivo):
         elif opcao == 3:
             dados[inicio_cadastro + 2] = 'E-mail: \n'
         elif opcao == 4:
-            dados[inicio_cadastro + 6] = 'Endereço: \n'
+            dados[inicio_cadastro + 3] = 'Nome do Responsável: \n'
         elif opcao == 5:
-            dados[inicio_cadastro + 7] = 'Bairro: \n'
+            dados[inicio_cadastro + 4] = 'Nome da Escola: \n'
         elif opcao == 6:
-            dados[inicio_cadastro + 8] = 'Cidade: \n'
+            dados[inicio_cadastro + 5] = 'Série Escolar: \n'
         elif opcao == 7:
-            dados[inicio_cadastro + 9] = 'Estado: \n'
+            dados[inicio_cadastro + 6] = 'Torcida: \n'
         elif opcao == 8:
-            dados[inicio_cadastro + 10] = 'Nome do Responsável: \n'
+            dados[inicio_cadastro + 7] = 'Posição: \n'
         elif opcao == 9:
-            dados[inicio_cadastro + 16] = 'Nome da Escola: \n'
-        elif opcao == 10:
-            dados[inicio_cadastro + 17] = 'Série na Escola: \n'
-        elif opcao == 11:
-            dados[inicio_cadastro + 18] = 'Torcida: \n'
-        elif opcao == 12:
-            dados[inicio_cadastro + 20] = 'Posição: \n'
-        elif opcao == 13:
-            dados[inicio_cadastro + 21] = 'Ídolo: \n'
+            dados[inicio_cadastro + 8] = 'Ídolo: \n'
         else:
             print('\033[31mOPÇÃO INVÁLIDA\033[0m')
             print('\033[33m-=-\033[0m' * 20)
@@ -513,9 +367,8 @@ def apagar_dados(arquivo):
         if opcao2 == 'NÃO' or opcao2 == 'N':
             break
 
-
     arquivo.writelines(dados)  # Escreve as alterações no arquivo
-    arquivo.truncate()  # remove as linhas remanescentes do conteúdo anterior, garantindo que apenas os dados atualizados permaneçam no arquivo.
+    arquivo.truncate()  # Remove as linhas remanescentes do conteúdo anterior, garantindo que apenas os dados atualizados permaneçam no arquivo.
 
 def backup():
     try:
@@ -538,7 +391,6 @@ def backup():
 
 def menu():
     import os
-    arquivo_aberto = None
 
     while True:
 
@@ -557,9 +409,7 @@ def menu():
             break
 
         elif opcao == "1":
-            arquivo_aberto = open("Dados.txt", "w")
             cadastrar_dados()
-            arquivo_aberto.close()
 
         elif opcao == "2":
             try:
