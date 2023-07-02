@@ -1,15 +1,15 @@
 def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são necessário para o cadastro na escolinha do flamengo
-    # abrir com with, abre e fecha o arquivo // "a" de append, se não tiver ou tiver um texto ele adiciona mais um
     with open("Dados.txt", "a") as arquivo:
         print("\033[31m-=-\033[0m" * 20)
-        print("\033[30mCADA\033[0m\033[31mSTRO\033[0m NA ESCOLINHA DO \033[30mC\033[0m.\033[31mR\033[0m. \033[31mFLAMENGO\033[0m")
+        print("        \u26BD CADA\033[31mSTRO NA\033[0m ESCOLINHA DO \033[31mC.R\033[0m. \033[31mFLAMENGO\033[0m \u26BD")
         print("\033[31m-=-\033[0m" * 20)
+        print("")
 
         while True:
             try:
-                id = input("Digite o id do jogador: ")
+                id = input("\033[32m->\033[0m Digite o id do jogador: ")
                 if not id.replace(" ", "").isdigit():
-                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS NÚMEROS AQUI E NÃO DEIXA VAZIO!\033[0m\033[31m<------\033[0m")
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS NÚMEROS AQUI E NÃO DEIXE VAZIO!\033[0m\033[31m<------\033[0m")
                 break
             except ValueError as erro:
                 print(str(erro))
@@ -17,7 +17,7 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
         while True:
             try:
                 # abrir com with, abre e fecha o arquivo // "a" de append, se não tiver ou tiver um texto ele adiciona mais um
-                nome = input("Digite o nome do jogador: ")
+                nome = input("\033[32m->\033[0m Digite o nome do jogador: ")
                 if not nome.replace(" ", "").isalpha():
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
                 break
@@ -26,9 +26,9 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
 
         while True:
             try:
-                telefone = input("Digite seu número de telefone (**) ****-****: ")
+                telefone = input("\033[32m->\033[0m Digite seu número de telefone (*) **-**: ")
                 if telefone.replace(" ", '').isdigit():
-                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO E COMECE DESSE JEITO: (**) ****-****!\033[0m\033[31m<------\033[0m")
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO E COMECE DESSE JEITO: (*) **-**\033[0m\033[31m<------\033[0m")
                 if "(" not in telefone or ")" not in telefone or "-" not in telefone:
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, SIGA A FORMATAÇÃO CORRETA EX: (*) **-**\033[0m \033[31m<------\033[0m")
                 break
@@ -37,18 +37,18 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
 
         while True:
             try:
-                e_mail = input("E-MAIL: ")
+                e_mail = input("\033[32m->\033[0m E-MAIL: ")
                 if e_mail == "":
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÂO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
                 if "@" not in e_mail or "." not in e_mail:
-                    raise ValueError(" ESCREVA UM EMAIL VÁLIDO COM: '@' e '.' ")
+                    raise ValueError("\033[31m------>\033[0m\033[33mESCREVA UM EMAIL VÁLIDO COM: '@' e '.' \033[0m\033[31m<------\033[0m")
                 break
             except ValueError as erro:
                 print(str(erro))
 
         while True:
             try:
-                sexo = input("Sexo:(MASCULINO/FEMININO) ").upper()
+                sexo = input("\033[32m->\033[0m Sexo:(MASCULINO/FEMININO) ").upper()
                 if sexo not in ("MASCULINO", "M", "F", "FEMININO"):
                     raise ValueError("\033[31m------>\033[0m\033[33mOPÇÃO INVÁLIDA, DIGITE MASCULINO, OU FEMENINO!\033[0m\033[31m<------\033[0m")
                 if not sexo.isalpha():
@@ -62,7 +62,7 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
 
         while True:
             try:
-                cpf = input("IDENTIDADE: ")
+                cpf = input("\033[32m->\033[0m CPF: ")
                 if not cpf.isdigit():
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS NÚMEROS AQUI!\033[0m\033[31m<------\033[0m")
                 if cpf == '':
@@ -75,7 +75,7 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
 
         while True:
             try:
-                data_nascimento = input("DATA DE NASCIMENTO: ")
+                data_nascimento = input("\033[32m->\033[0m DATA DE NASCIMENTO: ")
                 if not data_nascimento.replace('/', '').isdigit():
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, COLOQUE APENAS NÚMEROS E BARRAS CORRETAMENTE DD/MM/YYYY\033[0m\033[31m<------\033[0m")
                 break
@@ -84,33 +84,33 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
 
         while True:
             try:
-                cep = input("CEP: ")
+                cep = input("\033[32m->\033[0m CEP: ")
                 if not cep.isdigit():
-                    raise ValueError("POR FAVOR, APENAS NÚMEROS AQUI!")
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS NÚMEROS AQUI!\033[0m\033[31m<------\033[0m")
                 if cep == " ":
-                    raise ValueError("POR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO!")
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÂO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
                 if len(cep) != 8:
-                    raise ValueError("POR FAVOR, DIGITE UM CEP VÁLIDO COM 8 DÍGITOS!")
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, DIGITE UM CEP VÁLIDO COM 8 DÍGITOS!\033[0m\033[31m<------\033[0m")
                 break
             except ValueError as erro:
                 print(str(erro))
 
         while True:
             try:
-                nome_responsavel = input("NOME DO RESPONSÁVEL: ")
+                nome_responsavel = input("\033[32m->\033[0m NOME DO RESPONSÁVEL: ")
                 if not nome_responsavel.replace(" ", '').isalpha():
-                    raise ValueError("POR FAVOR, APENAS LETRAS AQUI!")
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
                 break
             except ValueError as erro:
                 print(str(erro))
 
         while True:
             try:
-                identidade_responsavel = input("CPF DO RESPONSÁVEL: ")
+                identidade_responsavel = input("\033[32m->\033[0m CPF DO RESPONSÁVEL: ")
                 if not identidade_responsavel.isdigit():
-                    raise ValueError("POR FAVOR, APENAS NÚMERO POR AQUI!")
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS NÚMEROS AQUI!\033[0m\033[31m<------\033[0m")
                 if identidade_responsavel == " ":
-                    raise ValueError("POR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO!")
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÂO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
                 if not identidade_responsavel != 11:
                     raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, COLOQUE OS 11 DIGITOS DA IDENTIDADE!\033[0m\033[31m<------\033[0m")
                 break
@@ -119,42 +119,40 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
 
         while True:
             try:
-                nome_escola = input("NOME DA ESCOLA QUE FREQUENTA: ")
+                nome_escola = input("\033[32m->\033[0m NOME DA ESCOLA QUE FREQUENTA: ")
                 if not nome_escola.replace(" ", '').isalpha():
-                    raise ValueError("POR FAVOR, APENAS LETRAS AQUI!")
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
                 if nome_escola == " ":
-                    raise ValueError("POR FAVOR, SEM ESPAÇOS EM BRANCO!")
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÂO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
                 break
             except ValueError as erro:
                 print(str(erro))
 
         while True:
             try:
-                serie_escola = input("SÉRIE NA ESCOLA: ")
-                if not serie_escola.isalnum():
-                    raise ValueError("POR FAVOR, APENAS LETRA POR AQUI!")
-                if serie_escola == " ":
-                    raise ValueError("POR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO!")
+                serie_escola = input("\033[32m->\033[0m SÉRIE NA ESCOLA: ")
+                if not serie_escola.replace(" ", '').isalnum():
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
                 break
             except ValueError as erro:
                 print(str(erro))
 
         while True:
             try:
-                posicao = input("QUAL A POSIÇÃO VOCÊ ATUA ?")
+                posicao = input("\033[32m->\033[0m QUAL A POSIÇÃO VOCÊ ATUA ?")
                 if not posicao.replace(" ", '').isalpha():
-                    raise ValueError("POR FAVOR, APENAS LETRAS AQUI!")
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
                 break
             except ValueError as erro:
                 print(str(erro))
 
         while True:
             try:
-                idolo = input("QUAL SEU ÍDOLO NO FUTEBOL? ")
+                idolo = input("\033[32m->\033[0m QUAL SEU ÍDOLO NO FUTEBOL? ")
                 if not idolo.replace(" ", '').isalpha():
-                    raise ValueError("POR FAVOR, APENAS LETRAS POR AQUI!")
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
                 if idolo == " ":
-                    raise ValueError(" POR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO!")
+                    raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÂO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
                 break
             except ValueError as erro:
                 print(str(erro))
@@ -164,22 +162,23 @@ def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são n
         arquivo.write(aluno)
 
     print("\033[31m-=-\033[0m" * 20)
-    print("\033[32mSEU CADASTRO FOI CONCLUIDO COM SUCESSO!\033[0m")
+    print("\033[32m        \U0001F3C6 SEU CADASTRO FOI CONCLUIDO COM SUCESSO!\033[0m \U0001F3C6")
     print("\033[31m-=-\033[0m" * 20)
 
 
 def listar():
     try:
         with open('Dados.txt', 'r') as arquivo:
-            print("-=-" * 20)
-            print("LISTAR DADOS")
-            print("-=-" * 20)
+            print("\033[31m-=-\033[0m" * 15)
+            print("        \u26BD LISTAR DADOS \u26BD")
+            print("\033[31m-=-\033[0m" * 15)
+            print("")
             linhas = arquivo.readlines()
             if not linhas:
-                print('NENHUM DADO DE CADASTRO ENCONTRADO')
+                print('\033[31m------>\033[0m\033[33mNENHUM DADO DE CADASTRO ENCONTRADO!\033[0m\033[31m<------\033[0m')
             else:
-                print('DADOS DE ALUNOS CADASTRADOS:')
-                registros = [] 
+                print(' \U0001F3C6 DADOS DE ALUNOS CADASTRADOS \U0001F3C6')
+                registros = []  # Lista para armazenar todos os registros
                 for linha in linhas:
                     dados = linha.strip().split(',')
 
@@ -199,7 +198,7 @@ def listar():
                     idolo = str(dados[13])
 
                     dados_cadastro = {
-                        "Id:": id,
+                        "Id": id,
                         "Nome": nome,
                         "Telefone": telefone,
                         "E-mail": e_mail,
@@ -217,27 +216,28 @@ def listar():
                     registros.append(dados_cadastro)
 
                 for dados_cadastro in registros:
-                    print("-------------------------------------------")
+                    print("\033[33m-------------------------------------------\033[0m")
                     for respositorio, valor in dados_cadastro.items():
                         print(respositorio + ":", valor)
     except FileNotFoundError:
-        print('Arquivo não encontrado')
+        print('\033[31m------>\033[0m\033[33mARQUIVO NÃO ENCONTRADO!\033[0m\033[31m<------\033[0m')
     except Exception as e:
-        print('Ocorreu um erro ao listar os dados:', str(e))
+        print('\033[31m------>\033[0m\033[33mOCORREU UM ERRO AO LISTAR DADOS!\033[0m\033[31m<------\033[0m', str(e))
 
 
 def alterar_dados():
     try:
         with open('Dados.txt', 'r+') as arquivo:
-            print("-=-" * 20)
-            print("ALTERAR DADOS")
-            print("-=-" * 20)
+            print("\033[31m-=-\033[0m" * 20)
+            print("                \U0001F45F ALTERAR DADOS \U0001F45F")
+            print("\033[31m-=-\033[0m" * 20)
+            print("")
             linhas = arquivo.readlines()
             if not linhas:
-                print('NENHUM DADO DE CADASTRO ENCONTRADO')
+                print('\033[31m------>\033[0m\033[33mNENHUM DADO DE CADASTRO ENCONTRADO!\033[0m\033[31m<------\033[0m')
                 return
 
-            id_aluno = int(input("Digite o ID do aluno que deseja alterar os dados: "))
+            id_aluno = int(input("\033[32m->\033[0m Digite o ID do aluno que deseja alterar os dados: "))
 
             cadastro = False
 
@@ -249,36 +249,176 @@ def alterar_dados():
                     cadastro = True
 
                     # Solicita os novos dados do aluno
-                    nome = input("Digite o novo nome: ")
-                    telefone = input("Digite o novo telefone: ")
-                    e_mail = input("Digite o novo e-mail: ")
-                    sexo = input("Digite o novo sexo: ")
-                    cpf = input("Digite o novo CPF: ")
-                    data_nascimento = input("Digite a nova data de nascimento: ")
-                    cep = input("Digite o novo CEP: ")
-                    nome_responsavel = input("Digite o novo nome do responsável: ")
-                    identidade_responsavel = input("Digite a nova identidade do responsável: ")
-                    nome_escola = input("Digite o novo nome da escola: ")
-                    serie_escola = input("Digite a nova série da escola: ")
-                    posicao = input("Digite a nova posição: ")
-                    idolo = input("Digite o novo ídolo do futebol: ")
+                    while True:
+                        try:
+                            nome = input("\033[32m->\033[0m Digite o novo nome do jogador: ")
+                            if not nome.replace(" ", "").isalpha():
+                                raise ValueError(
+                                    "\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
+                            break
+                        except ValueError as erro:
+                            print(str(erro))
+
+                    while True:
+                        try:
+                            telefone = input("\033[32m->\033[0m Digite o novo telefone (*) **-**: ")
+                            if telefone.replace(" ", '').isdigit():
+                                raise ValueError(
+                                    "\033[31m------>\033[0m\033[33mPOR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO E COMECE DESSE JEITO: () *-*!\033[0m\033[31m<------\033[0m")
+                            if "(" not in telefone or ")" not in telefone or "-" not in telefone:
+                                raise ValueError(
+                                    "\033[31m------>\033[0m\033[33mPOR FAVOR, SIGA A FORMATAÇÃO CORRETA EX: () -*\033[0m \033[31m<------\033[0m")
+                            break
+                        except ValueError as erro:
+                            print(str(erro))
+
+                    while True:
+                        try:
+                            e_mail = input("\033[32m->\033[0m Digite o novo e-mail: ")
+                            if e_mail == "":
+                                raise ValueError(
+                                    "\033[31m------>\033[0m\033[33mPOR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
+                            if "@" not in e_mail or "." not in e_mail:
+                                raise ValueError("\033[31m------>\033[0m\033[33mESCREVA UM EMAIL VÁLIDO COM: '@' e '.'\033[0m\033[31m<------\033[0m")
+                            break
+                        except ValueError as erro:
+                            print(str(erro))
+
+                    while True:
+                        try:
+                            sexo = input("\033[32m->\033[0m Digite o novo sexo (MASCULINO/FEMININO): ").upper()
+                            if sexo not in ("MASCULINO", "M", "F", "FEMININO"):
+                                raise ValueError(
+                                    "\033[31m------>\033[0m\033[33mOPÇÃO INVÁLIDA, DIGITE MASCULINO OU FEMININO!\033[0m\033[31m<------\033[0m")
+                            if not sexo.isalpha():
+                                raise ValueError(
+                                    "\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
+                            if sexo == '':
+                                raise ValueError(
+                                    "\033[31m------>\033[0m\033[33mPOR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
+
+                            break
+                        except ValueError as erro:
+                            print(str(erro))
+
+                    while True:
+                        try:
+                            cpf = input("\033[32m->\033[0m Digite o novo CPF: ")
+                            if not cpf.isdigit():
+                                raise ValueError(
+                                    "\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS NÚMEROS AQUI!\033[0m\033[31m<------\033[0m")
+                            if cpf == '':
+                                raise ValueError(
+                                    "\033[31m------>\033[0m\033[33mPOR FAVOR, NÃO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
+                            if len(cpf) != 11:
+                                raise ValueError(
+                                    "\033[31m------>\033[0m\033[33mPOR FAVOR, COLOQUE OS 11 DÍGITOS DO CPF!\033[0m\033[31m<------\033[0m")
+                            break
+                        except ValueError as erro:
+                            print(str(erro))
+
+                    while True:
+                        try:
+                            data_nascimento = input("\033[32m->\033[0m Digite a nova data de nascimento: ")
+                            if not data_nascimento.replace('/', '').isdigit():
+                                raise ValueError(
+                                    "\033[31m------>\033[0m\033[33mPOR FAVOR, COLOQUE APENAS NÚMEROS E BARRAS CORRETAMENTE DD/MM/YYYY\033[0m\033[31m<------\033[0m")
+                            break
+                        except ValueError as erro:
+                            print(str(erro))
+
+                    while True:
+                        try:
+                            cep = input("\033[32m->\033[0m Digite o novo CEP: ")
+                            if not cep.isdigit():
+                                raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS NÚMEROS AQUI!\033[0m\033[31m<------\033[0m")
+                            if cep == " ":
+                                raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÂO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
+                            if len(cep) != 8:
+                                raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, DIGITE UM CEP VÁLIDO COM 8 DÍGITOS!\033[0m\033[31m<------\033[0m")
+                            break
+                        except ValueError as erro:
+                            print(str(erro))
+
+                    while True:
+                        try:
+                            nome_responsavel = input("\033[32m->\033[0m Digite o novo nome do responsável: ")
+                            if not nome_responsavel.replace(" ", '').isalpha():
+                                raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
+                            break
+                        except ValueError as erro:
+                            print(str(erro))
+
+                    while True:
+                        try:
+                            identidade_responsavel = input("\033[32m->\033[0m Digite o novo CPF do responsável: ")
+                            if not identidade_responsavel.isdigit():
+                                raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS NÚMERO POR AQUI!\033[0m\033[31m<------\033[0m")
+                            if identidade_responsavel == " ":
+                                raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÂO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
+                            if len(identidade_responsavel) != 11:
+                                raise ValueError(
+                                    "\033[31m------>\033[0m\033[33mPOR FAVOR, COLOQUE OS 11 DÍGITOS DA IDENTIDADE!\033[0m\033[31m<------\033[0m")
+                            break
+                        except ValueError as erro:
+                            print(str(erro))
+
+                    while True:
+                        try:
+                            nome_escola = input("\033[32m->\033[0m Digite o novo nome da escola que frequenta: ")
+                            if not nome_escola.replace(" ", '').isalpha():
+                                raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
+                            if nome_escola == " ":
+                                raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÂO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
+                            break
+                        except ValueError as erro:
+                            print(str(erro))
+
+                    while True:
+                        try:
+                            serie_escola = input("\033[32m->\033[0m Digite a nova série na escola: ")
+                            if not serie_escola.replace(" ", '').isalnum():
+                                raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
+                            break
+                        except ValueError as erro:
+                            print(str(erro))
+
+                    while True:
+                        try:
+                            posicao = input("\033[32m->\033[0m Digite a nova posição em que atua: ")
+                            if not posicao.replace(" ", '').isalpha():
+                                raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
+                            break
+                        except ValueError as erro:
+                            print(str(erro))
+
+                    while True:
+                        try:
+                            idolo = input("\033[32m->\033[0m Digite o novo ídolo no futebol: ")
+                            if not idolo.replace(" ", '').isalpha():
+                                raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS LETRAS AQUI!\033[0m\033[31m<------\033[0m")
+                            if idolo == " ":
+                                raise ValueError("\033[31m------>\033[0m\033[33mPOR FAVOR, NÂO DEIXE ESPAÇOS EM BRANCO!\033[0m\033[31m<------\033[0m")
+                            break
+                        except ValueError as erro:
+                            print(str(erro))
 
                     # Atualiza os dados do aluno na linha correspondente
                     dados_alterados = [
                         str(id),
-                        nome,
-                        telefone,
-                        e_mail,
-                        sexo,
-                        cpf,
-                        data_nascimento,
-                        cep,
-                        nome_responsavel,
-                        identidade_responsavel,
-                        nome_escola,
-                        serie_escola,
-                        posicao,
-                        idolo
+                        str(nome),
+                        str(telefone),
+                        str(e_mail),
+                        str(sexo),
+                        str(cpf),
+                        str(data_nascimento),
+                        str(cep),
+                        str(nome_responsavel),
+                        str(identidade_responsavel),
+                        str(nome_escola),
+                        str(serie_escola),
+                        str(posicao),
+                        str(idolo)
                     ]
                     linhas[i] = ','.join(dados_alterados) + '\n'
 
@@ -286,29 +426,30 @@ def alterar_dados():
                     arquivo.seek(0)
                     arquivo.writelines(linhas)
                     arquivo.truncate()
-
-                    print("Dados alterados com sucesso!")
+                    print("\033[31m-=-\033[0m"*20)
+                    print("        \U0001F45F Dados alterados com sucesso! \U0001F45F")
+                    print("\033[31m-=-\033[0m"*20)
                     break
 
             if not cadastro:
-                print("ID não encontrado.")
+                print("\033[31m------>\033[0m\033[33mID NÃO ENCONTRADO!\033[0m\033[31m<------\033[0m")
     except FileNotFoundError:
-        print('Arquivo não encontrado')
+        print('\033[31m------>\033[0m\033[33mARQUIVO NÃO ENCONTRADO!\033[0m\033[31m<------\033[0m')
     except Exception as e:
-        print('Ocorreu um erro ao alterar os dados:', str(e))
+        print('\033[31m------>\033[0m\033[33mOCORREU UM ERRO AO ALTERAR DADOS!\033[0m\033[31m<------\033[0m', str(e))
 
 def apagar_dados():
     try:
         with open('Dados.txt', 'r+') as arquivo:
-            print("-=-" * 20)
-            print("ALTERAR DADOS")
-            print("-=-" * 20)
+            print("\033[31m-=-\033[0m" * 20)
+            print("        \U0001F5D1 APAGAR DADOS \U0001F5D1") # TENHO MINHAS DÚVIDAS KK
+            print("\033[31m-=-\033[0m" * 20)
             linhas = arquivo.readlines()
             if not linhas:
-                print('NENHUM DADO DE CADASTRO ENCONTRADO')
+                print('\033[31m------>\033[0m\033[33mNENHUM DADO DE CADASTRO ENCONTRADO!\033[0m\033[31m<------\033[0m')
                 return
 
-            id_aluno = int(input("Digite o ID do aluno que deseja excluir os dados: "))
+            id_aluno = int(input("\033[32m->\033[0m DIGITE O ID DO ALUNO QUE DESEJA EXCLUIR OS DADOS: "))
 
             excluido = False
             novas_linhas = []
@@ -326,14 +467,16 @@ def apagar_dados():
                 arquivo.seek(0)
                 arquivo.writelines(novas_linhas)
                 arquivo.truncate()
-                print("Dados excluídos com sucesso!")
+                print("\033[31m-=-\033[0m"*20)
+                print("\033[32m        \U0001F5D1 Dados excluídos com sucesso!\033[0m \U0001F5D1")
+                print("\033[31m-=-\033[0m"*20)
             else:
-                print("ID não encontrado.")
+                print("\033[31m------>\033[0m\033[33mID NÃO ENCONTRADO!\033[0m\033[31m<------\033[0m")
 
     except FileNotFoundError:
-        print('Arquivo não encontrado')
+        print('\033[31m------>\033[0m\033[33mARQUIVO NÃO ENCONTRADO!\033[0m\033[31m<------\033[0m')
     except Exception as e:
-        print('Ocorreu um erro ao excluir os dados:', str(e))
+        print('\033[31m------>\033[0m\033[33mPOR FAVOR, APENAS NÚMEROS AQUI!\033[0m\033[31m<------\033[0m', str(e))
 
 def backup():
     try:
@@ -345,13 +488,13 @@ def backup():
         with open("backup_Dados.txt", "a") as arquivo_backup:
             arquivo_backup.write(conteudo)
 
-        print("-=-" * 20)
-        print("BACKUP REALIZADO COM SUCESSO!")
-        print("-=-" * 20)
+        print("\033[31m-=-\033[0m" * 20)
+        print("        \U0001F4C2 BACKUP REALIZADO COM SUCESSO! \U0001F4C2")
+        print("\033[31m-=-\033[0m" * 20)
     except FileNotFoundError:
-        print("-=-" * 20)
-        print("ARQUIVO NÃO ENCONTRADO!")
-        print("-=-" * 20)
+        print("\033[31m-=-\033[0m" * 20)
+        print("\033[31m------>\033[0m\033[33mARQUIVO NÃO ENCONTRADO!\033[0m\033[31m<------\033[0m")
+        print("\033[31m-=-\033[0m" * 20)
 
 
 def menu():
@@ -359,18 +502,21 @@ def menu():
 
     while True:
 
-        print("ESCOLHA A OPÇÃO: \n [\033[32m1\033[0m] - \033[35mCadastrar Dados\033[0m\n"
+        print("\033[35m-----------------------\033[0m\n   ESCOLHA A OPÇÃO \n\033[35m-----------------------\033[0m\n \n [\033[32m1\033[0m] - \033[35mCadastrar Dados\033[0m\n"
               " [\033[32m2\033[0m] - \033[35mListar Dados\033[0m \n"
               " [\033[32m3\033[0m] - \033[35mAlterar Dados\033[0m \n"
               " [\033[32m4\033[0m] - \033[35mExcluir Dados\033[0m \n"
               " [\033[32m5\033[0m] - \033[35mBackup de Dados\033[0m \n"
               " [\033[32m0\033[0m] - \033[35mSair\033[0m")
-        opcao = input("Digite sua opção: ")
+        print("")
+        opcao = input("\033[31m->\033[0m Digite sua opção: ")
+
+
 
         if opcao == "0":
-            print("-=-" * 20)
-            print("FINALIZADO!")
-            print("-=-" * 20)
+            print("\033[35m-=-\033[0m" * 20)
+            print("        \u2705 FINALIZADO! \u2705")
+            print("\033[35m-=-\033[0m" * 20)
             break
 
         elif opcao == "1":
@@ -379,43 +525,37 @@ def menu():
         elif opcao == "2":
             try:
                 if not os.path.exists("Dados.txt") or os.path.getsize("Dados.txt") == 0:
-                    raise ValueError("AINDA NÃO HÁ CADASTRO")
+                    raise ValueError("\033[31m------>\033[0m\033[33mAINDA NÃO HÁ CADASTRO\033[0m\033[31m<------\033[0m")
                 listar()
             except ValueError as error:
-                print("-=-" * 20)
                 print(str(error))
-                print("-=-" * 20)
+                
 
         elif opcao == "3":
             try:
                 if not os.path.exists("Dados.txt") or os.path.getsize("Dados.txt") == 0:
-                    raise ValueError(" AINDA NÃO HÁ DADOS PARA ALTERAR ")
+                    raise ValueError("\033[31m------>\033[0m\033[33mAINDA NÃO HÁ DADOS PARA ALTERAR\033[0m\033[31m<------\033[0m")
                 alterar_dados()
             except ValueError as error:
-                print("-=-" * 20)
                 print(str(error))
-                print("-=-" * 20)
+                
 
         elif opcao == "4":
             try:
                 if not os.path.exists("Dados.txt") or os.path.getsize("Dados.txt") == 0:
-                    raise ValueError("AINDA NÃO HÁ DADOS PARA APAGAR")
+                    raise ValueError("\033[31m------>\033[0m\033[33mAINDA NÃO HÁ DADOS PARA APAGAR\033[0m\033[31m<------\033[0m")
                 apagar_dados()
             except ValueError as error:
-                print("-=-" * 20)
                 print(str(error))
-                print("-=-" * 20)
 
         elif opcao == "5":
             try:
                 if not os.path.exists("Dados.txt") or os.path.getsize("Dados.txt") == 0:
-                    raise ValueError("AINDA NÃO HÁ DADOS PARA FAZER BACKUP!")
+                    raise ValueError("\033[31m------>\033[0m\033[33mAINDA NÃO HÁ DADOS PARA FAZER BACKUP!\033[0m\033[31m<------\033[0m")
                 arquivo_aberto = open("Dados.txt", "r")
                 backup()
                 arquivo_aberto.close()
             except ValueError as error:
-                print("-=-" * 20)
                 print(str(error))
-                print("-=-" * 20)
         else:
-            print("OPÇÃO INVÁLIDA. DIGITE UM NÚMERO VÁLIDO.")
+            print("\033[31m------>\033[0m\033[33mOPÇÃO INVÁLIDA. DIGITE UM NÚMERO VÁLIDO.\033[0m\033[31m<------\033[0m")
