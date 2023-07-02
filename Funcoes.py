@@ -1,4 +1,5 @@
 def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são necessário para o cadastro na escolinha do flamengo
+    # abrir com with, abre e fecha o arquivo // "a" de append, se não tiver ou tiver um texto ele adiciona mais um
     with open("Dados.txt", "a") as arquivo:
         print("\033[31m-=-\033[0m" * 20)
         print("\033[30mCADA\033[0m\033[31mSTRO\033[0m NA ESCOLINHA DO \033[30mC\033[0m.\033[31mR\033[0m. \033[31mFLAMENGO\033[0m")
