@@ -1,18 +1,16 @@
 import random
 def cadastrar_dados():  # função cadastrar dados irá pedir quais dados são necessário para o cadastro na escolinha do flamengo
     # abrir com with, abre e fecha o arquivo // "a" de append, se não tiver ou tiver um texto ele adiciona mais um
-    global contador_id
     with open("Dados.txt", "a") as arquivo:
         print("\033[31m-=-\033[0m" * 20)
         print("        \u26BD CADA\033[31mSTRO NA\033[0m ESCOLINHA DO \033[31mC.R\033[0m. \033[31mFLAMENGO\033[0m \u26BD")
         print("\033[31m-=-\033[0m" * 20)
         print("")
 
-        contador_id = 1
         ids_cadastrados = []
         while True:
             try:
-                id = random.randint(1, 9999)  # Gera um número aleatório de 4 dígitos como ID do jogador
+                id = random.randint(1, 100)  # Gera um número aleatório ID do jogador
                 if id not in ids_cadastrados:  # Verifica se o ID já foi cadastrado
                     ids_cadastrados.append(id)  # Adiciona o ID à lista de IDs cadastrados
                     print("\033[32m->\033[0m SEU ID é:", id)
